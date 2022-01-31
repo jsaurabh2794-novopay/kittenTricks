@@ -11,7 +11,7 @@ export type CartItemProps = ListItemProps & {
   onRemove: (product: Product, index: number) => void;
 };
 
-export const CartItem = (props: CartItemProps): React.ReactElement => {
+export const CartItem = (props) => {
 
   const { style, product, index, onProductChange, onRemove, ...listItemProps } = props;
 
@@ -24,29 +24,29 @@ export const CartItem = (props: CartItemProps): React.ReactElement => {
   };
 
   const onMinusButtonPress = (): void => {
-    const updatedProduct: Product = new Product(
-      product.id,
-      product.title,
-      product.subtitle,
-      product.image,
-      product.price,
-      product.amount - 1,
-    );
+    // const updatedProduct: Product = new Product(
+    //   product.id,
+    //   product.title,
+    //   product.subtitle,
+    //   product.image,
+    //   product.price,
+    //   product.amount - 1,
+    // );
 
-    onProductChange(updatedProduct, index);
+    // onProductChange(updatedProduct, index);
   };
 
   const onPlusButtonPress = (): void => {
-    const updatedProduct: Product = new Product(
-      product.id,
-      product.title,
-      product.subtitle,
-      product.image,
-      product.price,
-      product.amount + 1,
-    );
+    // const updatedProduct: Product = new Product(
+    //   product.id,
+    //   product.title,
+    //   product.subtitle,
+    //   product.image,
+    //   product.price,
+    //   product.amount + 1,
+    // );
 
-    onProductChange(updatedProduct, index);
+    // onProductChange(updatedProduct, index);
   };
 
   return (
@@ -55,7 +55,7 @@ export const CartItem = (props: CartItemProps): React.ReactElement => {
       style={[styles.container, style]}>
       <Image
         style={styles.image}
-        source={product.image}
+        source={{uri:product.thumbnail}}
       />
       <View style={styles.detailsContainer}>
         <Text
@@ -65,12 +65,12 @@ export const CartItem = (props: CartItemProps): React.ReactElement => {
         <Text
           appearance='hint'
           category='p2'>
-          {product.subtitle}
+          {product.category}
         </Text>
         <Text category='s2'>
-          {product.formattedPrice}
+          ${product.formattedPrice}
         </Text>
-        <View style={styles.amountContainer}>
+        {/* <View style={styles.amountContainer}>
           <Button
             style={[styles.iconButton, styles.amountButton]}
             size='tiny'
@@ -89,7 +89,7 @@ export const CartItem = (props: CartItemProps): React.ReactElement => {
             accessoryLeft={PlusIcon}
             onPress={onPlusButtonPress}
           />
-        </View>
+        </View> */}
       </View>
       <Button
         style={[styles.iconButton, styles.removeButton]}

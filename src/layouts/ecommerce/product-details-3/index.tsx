@@ -28,17 +28,22 @@ export default ({ navigation, route }): React.ReactElement => {
   console.log("Item selected", route.params);
   const product = route.params;
   const onBuyButtonPress = (): void => {
-    navigation && navigation.navigate("Payment");
+    navigation && navigation.navigate("Payment",product);
   };
 
   const onAddButtonPress = (): void => {
-    navigation && navigation.navigate("ShoppingCart");
+    navigation && navigation.navigate("ShoppingCart",product);
   };
+
+  const sizeOptions:any = product?.options?.find(item=>item.title==="Size");
+  const sizes = sizeOptions?.values;
+  const colorOptions:any = product?.options?.find(item=>item.title==="Color");
+  const colors:any = colorOptions?.values;
 
   const renderColorItem = (color, index: number): React.ReactElement => (
     <Radio key={index} style={styles.colorRadio}>
       {(evaProps) => (
-        <Text {...evaProps} style={{ color: color.value, marginLeft: 10 }}>
+        <Text {...evaProps} style={{marginLeft: 10 }}>
           {color.value.toUpperCase()}
         </Text>
       )}
@@ -74,31 +79,31 @@ export default ({ navigation, route }): React.ReactElement => {
         <Text style={styles.sectionLabel} category="h6">
           Size:
         </Text>
-        {product?.options.length > 0 && (
+        {sizes && sizes.length > 0 && (
           <RadioGroup
             style={styles.colorGroup}
             selectedIndex={selectSizeIndex}
             onChange={setSelectedSizeIndex}
           >
-            {product?.options[0].values.map(renderSizeItem)}
+            {sizes.map(renderSizeItem)}
           </RadioGroup>
         )}
-         {product?.options.length == 0 && (
+         {!sizes && (
           <Text>Not Available</Text>
         )}
         <Text style={styles.sectionLabel} category="h6">
           Color:
         </Text>
-        {product?.options.length > 1 && (
+        {colors && colors.length > 0 && (
           <RadioGroup
             style={styles.colorGroup}
             selectedIndex={selectedColorIndex}
             onChange={setSelectedColorIndex}
           >
-            {product?.options[1].values.map(renderColorItem)}
+            {colors.map(renderColorItem)}
           </RadioGroup>
         )}
-         {product?.options.length == 1 && (
+         {!colors && (
           <Text>Not Available</Text>
         )}
         <View style={styles.actionContainer}>

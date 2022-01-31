@@ -5,7 +5,7 @@ import { SafeAreaLayout } from '../../components/safe-area-layout.component';
 import { ArrowIosBackIcon } from '../../components/icons';
 import ContentView from '../../layouts/ecommerce/payment';
 
-export const PaymentScreen = ({ navigation }): React.ReactElement => {
+export const PaymentScreen = ({ navigation, route }): React.ReactElement => {
 
   const renderBackAction = (): React.ReactElement => (
     <TopNavigationAction
@@ -22,7 +22,7 @@ export const PaymentScreen = ({ navigation }): React.ReactElement => {
         title='Payment'
         accessoryLeft={renderBackAction}
       />
-      <ContentView navigation={navigation}/>
+      <ContentView navigation={navigation} route={route}/>
     </SafeAreaLayout>
   );
 };

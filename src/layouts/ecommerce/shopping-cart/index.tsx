@@ -1,29 +1,23 @@
 import React from 'react';
-import { ListRenderItemInfo } from 'react-native';
 import { Button, Layout, List, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import { CartItem } from './extra/cart-item.component';
-import { Product } from './extra/data';
 
-const initialProducts: Product[] = [
-  Product.pinkChair(),
-  Product.blackLamp(),
-];
 
-export default (): React.ReactElement => {
-
+export default ({route}): React.ReactElement => {
+  const selectedProduct = route.params;
   const styles = useStyleSheet(themedStyle);
-  const [products, setProducts] = React.useState<Product[]>(initialProducts);
+  const [products, setProducts] = React.useState<any[]>([selectedProduct]);
 
   const totalCost = (): number => {
-    return products.reduce((acc: number, product: Product): number => acc + product.totalPrice, 0);
+    return products.reduce((acc: number, product: any): number => acc + product.formattedPrice, 0);
   };
 
-  const onItemRemove = (product: Product, index: number): void => {
+  const onItemRemove = (product: any, index: number): void => {
     products.splice(index, 1);
     setProducts([...products]);
   };
 
-  const onItemChange = (product: Product, index: number): void => {
+  const onItemChange = (product: any, index: number): void => {
     products[index] = product;
     setProducts([...products]);
   };
@@ -35,7 +29,7 @@ export default (): React.ReactElement => {
     </Layout>
   );
 
-  const renderProductItem = (info: ListRenderItemInfo<Product>): React.ReactElement => (
+  const renderProductItem = (info) => (
     <CartItem
       style={styles.item}
       index={info.index}

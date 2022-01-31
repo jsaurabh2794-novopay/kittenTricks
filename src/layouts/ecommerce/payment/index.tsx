@@ -16,8 +16,8 @@ const paymentCards: PaymentCard[] = [
   PaymentCard.emilyClarckVisa(),
 ];
 
-export default ({ navigation }): React.ReactElement => {
-
+export default ({ navigation,route }): React.ReactElement => {
+  console.log("Payment Page",route.params);
   const styles = useStyleSheet(themedStyles);
 
   const onBuyButtonPress = (): void => {
@@ -135,7 +135,7 @@ const themedStyles = StyleService.create({
   cardLogo: {
     height: 24,
     width: 75,
-    tintColor: 'text-control-color',
+    color: 'text-control-color',
   },
   cardOptionsButton: {
     position: 'absolute',
@@ -170,7 +170,7 @@ const themedStyles = StyleService.create({
     alignSelf: 'center',
     width: 48,
     height: 48,
-    tintColor: 'text-hint-color',
+    color: 'text-hint-color',
   },
   buyButtonContainer: {
     position: 'absolute',

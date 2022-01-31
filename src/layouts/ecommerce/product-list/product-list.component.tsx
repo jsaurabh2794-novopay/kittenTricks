@@ -33,8 +33,8 @@ export const ProductListScreen = ({
     navigation && navigation.navigate("ProductDetails3",item);
   };
 
-  const onItemCartPress = (index: number): void => {
-    navigation && navigation.navigate("ShoppingCart");
+  const onItemCartPress = (item: any): void => {
+    navigation && navigation.navigate("ShoppingCart",item);
   };
 
   const renderItemFooter = (info) => (
@@ -44,7 +44,7 @@ export const ProductListScreen = ({
         style={styles.iconButton}
         size="small"
         accessoryLeft={CartIcon}
-        onPress={() => onItemCartPress(info.index)}
+        onPress={() => onItemCartPress(info.item)}
       />
     </View>
   );

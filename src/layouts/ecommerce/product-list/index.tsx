@@ -32,5 +32,6 @@ export default (): React.ReactElement => (
     <TopTabs.Screen name='All' component={ProductListScreen}/>
     <TopTabs.Screen name='Topwear' component={ProductListScreen}/>
     <TopTabs.Screen name='Bottomwear' component={ProductListScreen}/>
+    <TopTabs.Screen name='Others' component={ProductListScreen}/>
   </TopTabs.Navigator>
 );

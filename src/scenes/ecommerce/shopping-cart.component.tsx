@@ -5,7 +5,7 @@ import { SafeAreaLayout } from '../../components/safe-area-layout.component';
 import { ArrowIosBackIcon, SearchIcon } from '../../components/icons';
 import ContentView from '../../layouts/ecommerce/shopping-cart';
 
-export const ShoppingCartScreen = ({ navigation }): React.ReactElement => {
+export const ShoppingCartScreen = ({ navigation,route }): React.ReactElement => {
 
   const onSearchActionPress = (): void => {
     navigation.navigate('ProductList');
@@ -34,7 +34,7 @@ export const ShoppingCartScreen = ({ navigation }): React.ReactElement => {
         accessoryLeft={renderBackAction}
         accessoryRight={renderSearchAction}
       />
-      <ContentView/>
+      <ContentView route={route}/>
     </SafeAreaLayout>
   );
 };
