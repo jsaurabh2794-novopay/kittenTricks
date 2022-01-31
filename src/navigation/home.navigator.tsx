@@ -34,7 +34,7 @@ const HomeTabsNavigator = (): React.ReactElement => (
   <BottomTab.Navigator
     screenOptions={TabBarVisibilityOptions}
     initialRouteName={initialTabRoute}
-    tabBar={props => <HomeBottomNavigation {...props} />}>
+    tabBar={props => <HomeBottomNavigation {...props} />} >
     <BottomTab.Screen name='Layouts' component={LayoutsNavigator} />
     <BottomTab.Screen name='Components' component={ComponentsNavigator} />
     <BottomTab.Screen name='Themes' component={ThemesNavigator} />

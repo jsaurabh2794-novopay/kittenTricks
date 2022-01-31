@@ -1,5 +1,5 @@
-import React from 'react';
-import { ImageBackground, Platform, View } from 'react-native';
+import React from "react";
+import { ImageBackground, Platform, View } from "react-native";
 import {
   Button,
   Input,
@@ -9,38 +9,48 @@ import {
   StyleService,
   Text,
   useStyleSheet,
-} from '@ui-kitten/components';
-import { KeyboardAvoidingView } from './extra/keyboard-avoiding-view.component';
-import { CommentList } from './extra/comment-list.component';
-import { Product, ProductColor } from './extra/data';
+} from "@ui-kitten/components";
+import { KeyboardAvoidingView } from "./extra/keyboard-avoiding-view.component";
+import { CommentList } from "./extra/comment-list.component";
+import { Product, ProductColor } from "./extra/data";
 
-const product: Product = Product.pinkChair();
+const keyboardOffset = (height: number): number =>
+  Platform.select({
+    android: 0,
+    ios: height,
+  });
 
-const keyboardOffset = (height: number): number => Platform.select({
-  android: 0,
-  ios: height,
-});
-
-export default ({ navigation }): React.ReactElement => {
-
+export default ({ navigation, route }): React.ReactElement => {
   const [comment, setComment] = React.useState<string>();
   const [selectedColorIndex, setSelectedColorIndex] = React.useState<number>();
+  const [selectSizeIndex, setSelectedSizeIndex] = React.useState<number>();
   const styles = useStyleSheet(themedStyles);
-
+  console.log("Item selected", route.params);
+  const product = route.params;
   const onBuyButtonPress = (): void => {
-    navigation && navigation.navigate('Payment');
+    navigation && navigation.navigate("Payment");
   };
 
   const onAddButtonPress = (): void => {
-    navigation && navigation.navigate('ShoppingCart');
+    navigation && navigation.navigate("ShoppingCart");
   };
 
-  const renderColorItem = (color: ProductColor, index: number): React.ReactElement => (
-    <Radio
-      key={index}
-      style={styles.colorRadio}
-    >
-      {evaProps => <Text {...evaProps} style={{ color: color.value, marginLeft: 10, }}>{color.description.toUpperCase()}</Text>}
+  const renderColorItem = (color, index: number): React.ReactElement => (
+    <Radio key={index} style={styles.colorRadio}>
+      {(evaProps) => (
+        <Text {...evaProps} style={{ color: color.value, marginLeft: 10 }}>
+          {color.value.toUpperCase()}
+        </Text>
+      )}
+    </Radio>
+  );
+  const renderSizeItem = (size, index: number): React.ReactElement => (
+    <Radio key={index} style={styles.colorRadio}>
+      {(evaProps) => (
+        <Text {...evaProps} style={{ marginLeft: 10 }}>
+          {size.value.toUpperCase()}
+        </Text>
+      )}
     </Radio>
   );
 
@@ -48,72 +58,75 @@ export default ({ navigation }): React.ReactElement => {
     <Layout style={styles.header}>
       <ImageBackground
         style={styles.image}
-        source={product.image}
+        source={{ uri: product.thumbnail }}
       />
-      <Layout
-        style={styles.detailsContainer}
-        level='1'>
-        <Text
-          category='h6'>
-          {product.title}
+      <Layout style={styles.detailsContainer} level="1">
+        <Text category="h6">{product.title}</Text>
+        <Text style={styles.subtitle} appearance="hint" category="p2">
+          {product.category}
         </Text>
-        <Text
-          style={styles.subtitle}
-          appearance='hint'
-          category='p2'>
-          {product.subtitle}
+        <Text style={styles.price} category="h4">
+          ${product.formattedPrice}
         </Text>
-        <Text
-          style={styles.price}
-          category='h4'>
-          {product.price}
-        </Text>
-        <Text
-          style={styles.description}
-          appearance='hint'>
+        <Text style={styles.description} appearance="hint">
           {product.description}
         </Text>
-        <Text
-          style={styles.sectionLabel}
-          category='h6'>
+        <Text style={styles.sectionLabel} category="h6">
           Size:
         </Text>
-        <Text
-          style={styles.size}
-          appearance='hint'>
-          {product.size}
-        </Text>
-        <Text
-          style={styles.sectionLabel}
-          category='h6'>
+        {product?.options.length > 0 && (
+          <RadioGroup
+            style={styles.colorGroup}
+            selectedIndex={selectSizeIndex}
+            onChange={setSelectedSizeIndex}
+          >
+            {product?.options[0].values.map(renderSizeItem)}
+          </RadioGroup>
+        )}
+         {product?.options.length == 0 && (
+          <Text>Not Available</Text>
+        )}
+        <Text style={styles.sectionLabel} category="h6">
           Color:
         </Text>
-        <RadioGroup
-          style={styles.colorGroup}
-          selectedIndex={selectedColorIndex}
-          onChange={setSelectedColorIndex}>
-          {product.colors.map(renderColorItem)}
-        </RadioGroup>
+        {product?.options.length > 1 && (
+          <RadioGroup
+            style={styles.colorGroup}
+            selectedIndex={selectedColorIndex}
+            onChange={setSelectedColorIndex}
+          >
+            {product?.options[1].values.map(renderColorItem)}
+          </RadioGroup>
+        )}
+         {product?.options.length == 1 && (
+          <Text>Not Available</Text>
+        )}
         <View style={styles.actionContainer}>
           <Button
             style={styles.actionButton}
-            size='giant'
-            onPress={onBuyButtonPress}>
+            size="giant"
+            onPress={onBuyButtonPress}
+          >
             BUY
           </Button>
           <Button
             style={styles.actionButton}
-            size='giant'
-            status='control'
-            onPress={onAddButtonPress}>
+            size="giant"
+            status="control"
+            onPress={onAddButtonPress}
+          >
             ADD TO BAG
           </Button>
         </View>
       </Layout>
       <Input
         style={styles.commentInput}
-        label={evaProps => <Text {...evaProps} style={styles.commentInputLabel}>Comments</Text>}
-        placeholder='Write your comment'
+        label={(evaProps) => (
+          <Text {...evaProps} style={styles.commentInputLabel}>
+            Comments
+          </Text>
+        )}
+        placeholder="Write your comment"
         value={comment}
         onChangeText={setComment}
       />
@@ -121,9 +134,7 @@ export default ({ navigation }): React.ReactElement => {
   );
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      offset={keyboardOffset}>
+    <KeyboardAvoidingView style={styles.container} offset={keyboardOffset}>
       <CommentList
         style={styles.commentList}
         data={product.comments}
@@ -136,18 +147,18 @@ export default ({ navigation }): React.ReactElement => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: 'background-basic-color-2',
+    backgroundColor: "background-basic-color-2",
   },
   commentList: {
     flex: 1,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   header: {
     marginBottom: 8,
   },
   image: {
     height: 340,
-    width: '100%',
+    width: "100%",
   },
   detailsContainer: {
     paddingVertical: 24,
@@ -157,7 +168,7 @@ const themedStyles = StyleService.create({
     marginTop: 4,
   },
   price: {
-    position: 'absolute',
+    position: "absolute",
     top: 24,
     right: 16,
   },
@@ -168,14 +179,14 @@ const themedStyles = StyleService.create({
     marginBottom: 16,
   },
   colorGroup: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginHorizontal: -8,
   },
   colorRadio: {
     marginHorizontal: 8,
   },
   actionContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginHorizontal: -8,
     marginTop: 24,
   },
@@ -189,7 +200,7 @@ const themedStyles = StyleService.create({
   commentInputLabel: {
     fontSize: 16,
     marginBottom: 8,
-    color: 'text-basic-color',
+    color: "text-basic-color",
   },
   commentInput: {
     marginHorizontal: 16,

@@ -20,7 +20,8 @@ export const ProductListScreen = ({ navigation }): React.ReactElement => {
       insets='top'>
       <TopNavigation
         title='All Products'
-        accessoryLeft={renderBackAction}
+        style={{backgroundColor:"lightblue"}}
+        // accessoryLeft={renderBackAction} 
       />
       <ContentView/>
     </SafeAreaLayout>

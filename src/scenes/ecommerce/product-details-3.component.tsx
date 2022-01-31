@@ -5,8 +5,7 @@ import { SafeAreaLayout } from '../../components/safe-area-layout.component';
 import { ArrowIosBackIcon, BookmarkIcon, BookmarkOutlineIcon } from '../../components/icons';
 import ContentView from '../../layouts/ecommerce/product-details-3';
 
-export const ProductDetails3Screen = ({ navigation }): React.ReactElement => {
-
+export const ProductDetails3Screen = ({ navigation,route }): React.ReactElement => {
   const [bookmarked, setBookmarked] = React.useState<boolean>(false);
 
   const onBookmarkActionPress = (): void => {
@@ -32,11 +31,11 @@ export const ProductDetails3Screen = ({ navigation }): React.ReactElement => {
       style={styles.container}
       insets='top'>
       <TopNavigation
-        title='Product Details'
+        title={route.params.title}
         accessoryLeft={renderBackAction}
         accessoryRight={renderBookmarkAction}
       />
-      <ContentView navigation={navigation}/>
+      <ContentView navigation={navigation} route={route}/>
     </SafeAreaLayout>
   );
 };
