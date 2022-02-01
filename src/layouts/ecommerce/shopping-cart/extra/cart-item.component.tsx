@@ -1,8 +1,8 @@
-import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
-import { Button, ListItem, ListItemProps, Text } from '@ui-kitten/components';
-import { CloseIcon, MinusIcon, PlusIcon } from './icons';
-import { Product } from './data';
+import React from "react";
+import { Image, StyleSheet, View } from "react-native";
+import { Button, ListItem, ListItemProps, Text } from "@ui-kitten/components";
+import { CloseIcon, MinusIcon, PlusIcon } from "./icons";
+import { Product } from "./data";
 
 export type CartItemProps = ListItemProps & {
   index: number;
@@ -12,11 +12,19 @@ export type CartItemProps = ListItemProps & {
 };
 
 export const CartItem = (props) => {
-
-  const { style, product, index, onProductChange, onRemove, ...listItemProps } = props;
+  const {
+    style,
+    product,
+    index,
+    onProductChange,
+    onRemove,
+    count,
+    setCount,
+    ...listItemProps
+  } = props;
 
   const decrementButtonEnabled = (): boolean => {
-    return product.amount > 1;
+    return count > 1;
   };
 
   const onRemoveButtonPress = (): void => {
@@ -24,77 +32,45 @@ export const CartItem = (props) => {
   };
 
   const onMinusButtonPress = (): void => {
-    // const updatedProduct: Product = new Product(
-    //   product.id,
-    //   product.title,
-    //   product.subtitle,
-    //   product.image,
-    //   product.price,
-    //   product.amount - 1,
-    // );
-
-    // onProductChange(updatedProduct, index);
+    setCount((prev) => prev - 1);
   };
 
   const onPlusButtonPress = (): void => {
-    // const updatedProduct: Product = new Product(
-    //   product.id,
-    //   product.title,
-    //   product.subtitle,
-    //   product.image,
-    //   product.price,
-    //   product.amount + 1,
-    // );
-
-    // onProductChange(updatedProduct, index);
+    setCount((prev) => prev + 1);
   };
 
   return (
-    <ListItem
-      {...listItemProps}
-      style={[styles.container, style]}>
-      <Image
-        style={styles.image}
-        source={{uri:product.thumbnail}}
-      />
+    <ListItem {...listItemProps} style={[styles.container, style]}>
+      <Image style={styles.image} source={{ uri: product.thumbnail }} />
       <View style={styles.detailsContainer}>
-        <Text
-          category='s1'>
-          {product.title}
-        </Text>
-        <Text
-          appearance='hint'
-          category='p2'>
+        <Text category="s1">{product.title}</Text>
+        <Text appearance="hint" category="p2">
           {product.category}
         </Text>
-        <Text category='s2'>
-          ${product.formattedPrice}
-        </Text>
-        {/* <View style={styles.amountContainer}>
+        <Text category="s2">${product.formattedPrice}</Text>
+        <View style={styles.amountContainer}>
           <Button
             style={[styles.iconButton, styles.amountButton]}
-            size='tiny'
+            size="tiny"
             accessoryLeft={MinusIcon}
             onPress={onMinusButtonPress}
             disabled={!decrementButtonEnabled()}
           />
-          <Text
-            style={styles.amount}
-            category='s2'>
-            {`${product.amount}`}
+          <Text style={styles.amount} category="s2">
+            {`${count}`}
           </Text>
           <Button
             style={[styles.iconButton, styles.amountButton]}
-            size='tiny'
+            size="tiny"
             accessoryLeft={PlusIcon}
             onPress={onPlusButtonPress}
           />
-        </View> */}
+        </View>
       </View>
       <Button
         style={[styles.iconButton, styles.removeButton]}
-        appearance='ghost'
-        status='basic'
+        appearance="ghost"
+        status="basic"
         accessoryLeft={CloseIcon}
         onPress={onRemoveButtonPress}
       />
@@ -104,7 +80,7 @@ export const CartItem = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
     paddingHorizontal: 0,
     paddingVertical: 0,
   },
@@ -114,12 +90,12 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     flex: 1,
-    height: '100%',
+    height: "100%",
     padding: 16,
   },
   amountContainer: {
-    position: 'absolute',
-    flexDirection: 'row',
+    position: "absolute",
+    flexDirection: "row",
     left: 16,
     bottom: 16,
   },
@@ -127,11 +103,11 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   amount: {
-    textAlign: 'center',
+    textAlign: "center",
     width: 40,
   },
   removeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
   },
   iconButton: {

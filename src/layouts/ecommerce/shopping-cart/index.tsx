@@ -1,20 +1,23 @@
 import React from 'react';
 import { Button, Layout, List, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import { CartItem } from './extra/cart-item.component';
+import { useState } from 'react';
 
 
 export default ({route}): React.ReactElement => {
   const selectedProduct = route.params;
   const styles = useStyleSheet(themedStyle);
   const [products, setProducts] = React.useState<any[]>([selectedProduct]);
+  const [count,setCount] = useState(1);
 
   const totalCost = (): number => {
-    return products.reduce((acc: number, product: any): number => acc + product.formattedPrice, 0);
+    return count * selectedProduct.formattedPrice;
   };
 
   const onItemRemove = (product: any, index: number): void => {
     products.splice(index, 1);
     setProducts([...products]);
+    setCount(0);
   };
 
   const onItemChange = (product: any, index: number): void => {
@@ -31,12 +34,14 @@ export default ({route}): React.ReactElement => {
 
   const renderProductItem = (info) => (
     <CartItem
+      count={count}
+      setCount={setCount}
       style={styles.item}
       index={info.index}
       product={info.item}
       onProductChange={onItemChange}
       onRemove={onItemRemove}
-    />
+    /> 
   );
 
   return (
