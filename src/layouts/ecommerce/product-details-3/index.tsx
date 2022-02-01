@@ -56,7 +56,7 @@ export default ({ navigation, route }): React.ReactElement => {
             status="danger"
             accessoryLeft={HeartIcon}
           >
-            {`1`}
+            {`0`}
           </Button>
         </View>
       </Card>
