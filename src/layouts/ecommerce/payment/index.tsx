@@ -17,7 +17,6 @@ const paymentCards: PaymentCard[] = [
 ];
 
 export default ({ navigation,route }): React.ReactElement => {
-  console.log("Payment Page",route.params);
   const styles = useStyleSheet(themedStyles);
 
   const onBuyButtonPress = (): void => {

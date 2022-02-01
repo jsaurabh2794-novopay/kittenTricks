@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageBackground, Platform, View } from "react-native";
+import { ImageBackground, Platform, View, ScrollView } from "react-native";
 import {
   Button,
   Input,
@@ -25,25 +25,28 @@ export default ({ navigation, route }): React.ReactElement => {
   const [selectedColorIndex, setSelectedColorIndex] = React.useState<number>();
   const [selectSizeIndex, setSelectedSizeIndex] = React.useState<number>();
   const styles = useStyleSheet(themedStyles);
-  console.log("Item selected", route.params);
-  const product = route.params;
+   const product = route.params;
   const onBuyButtonPress = (): void => {
-    navigation && navigation.navigate("Payment",product);
+    navigation && navigation.navigate("Payment", product);
   };
 
   const onAddButtonPress = (): void => {
-    navigation && navigation.navigate("ShoppingCart",product);
+    navigation && navigation.navigate("ShoppingCart", product);
   };
 
-  const sizeOptions:any = product?.options?.find(item=>item.title==="Size");
+  const sizeOptions: any = product?.options?.find(
+    (item) => item.title === "Size"
+  );
   const sizes = sizeOptions?.values;
-  const colorOptions:any = product?.options?.find(item=>item.title==="Color");
-  const colors:any = colorOptions?.values;
+  const colorOptions: any = product?.options?.find(
+    (item) => item.title === "Color"
+  );
+  const colors: any = colorOptions?.values;
 
   const renderColorItem = (color, index: number): React.ReactElement => (
     <Radio key={index} style={styles.colorRadio}>
       {(evaProps) => (
-        <Text {...evaProps} style={{marginLeft: 10 }}>
+        <Text {...evaProps} style={{ marginLeft: 10 }}>
           {color.value.toUpperCase()}
         </Text>
       )}
@@ -80,32 +83,32 @@ export default ({ navigation, route }): React.ReactElement => {
           Size:
         </Text>
         {sizes && sizes.length > 0 && (
-          <RadioGroup
-            style={styles.colorGroup}
-            selectedIndex={selectSizeIndex}
-            onChange={setSelectedSizeIndex}
-          >
-            {sizes.map(renderSizeItem)}
-          </RadioGroup>
+          <ScrollView horizontal={true}>
+            <RadioGroup
+              style={styles.colorGroup}
+              selectedIndex={selectSizeIndex}
+              onChange={setSelectedSizeIndex}
+            >
+              {sizes.map(renderSizeItem)}
+            </RadioGroup>
+          </ScrollView>
         )}
-         {!sizes && (
-          <Text>Not Available</Text>
-        )}
+        {!sizes && <Text>Not Available</Text>}
         <Text style={styles.sectionLabel} category="h6">
           Color:
         </Text>
         {colors && colors.length > 0 && (
-          <RadioGroup
-            style={styles.colorGroup}
-            selectedIndex={selectedColorIndex}
-            onChange={setSelectedColorIndex}
-          >
-            {colors.map(renderColorItem)}
-          </RadioGroup>
+          <ScrollView horizontal={true}>
+            <RadioGroup
+              style={styles.colorGroup}
+              selectedIndex={selectedColorIndex}
+              onChange={setSelectedColorIndex}
+            >
+              {colors.map(renderColorItem)}
+            </RadioGroup>
+          </ScrollView>
         )}
-         {!colors && (
-          <Text>Not Available</Text>
-        )}
+        {!colors && <Text>Not Available</Text>}
         <View style={styles.actionContainer}>
           <Button
             style={styles.actionButton}
