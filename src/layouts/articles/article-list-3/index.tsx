@@ -17,7 +17,7 @@ export default ({ navigation }): React.ReactElement => {
     navigation && navigation.navigate('Article3');
   };
 
-  const renderItem = (info: ListRenderItemInfo<Article>): React.ReactElement => (
+  const renderItem = (info) => (
     <Card
       style={styles.item}
       onPress={() => onItemPress(info.index)}>

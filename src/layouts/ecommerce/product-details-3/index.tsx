@@ -1,9 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { ImageBackground, Platform, View, ScrollView } from "react-native";
 import {
   Button,
+  Card,
   Input,
   Layout,
+  List,
   Radio,
   RadioGroup,
   StyleService,
@@ -13,6 +15,8 @@ import {
 import { KeyboardAvoidingView } from "./extra/keyboard-avoiding-view.component";
 import { CommentList } from "./extra/comment-list.component";
 import { Product, ProductColor } from "./extra/data";
+import { useState } from "react";
+import { HeartIcon, MessageCircleIcon } from "./extra/icons";
 
 const keyboardOffset = (height: number): number =>
   Platform.select({
@@ -22,10 +26,42 @@ const keyboardOffset = (height: number): number =>
 
 export default ({ navigation, route }): React.ReactElement => {
   const [comment, setComment] = React.useState<string>();
+  const [commentList, setCommentList] = useState([]);
   const [selectedColorIndex, setSelectedColorIndex] = React.useState<number>();
   const [selectSizeIndex, setSelectedSizeIndex] = React.useState<number>();
   const styles = useStyleSheet(themedStyles);
-   const product = route.params;
+  const product = route.params;
+
+  const addCommentsHandler = () => {
+    setCommentList([...commentList, comment]);
+    setComment("");
+  };
+
+  const commentListViewHandler = (info) => {
+    return (
+      <Card style={styles.commentItem}>
+        <Text>{info.item}</Text>
+        <View style={styles.commentReactionsContainer}>
+          <Button
+            style={styles.iconButton}
+            appearance="ghost"
+            status="basic"
+            accessoryLeft={MessageCircleIcon}
+          >
+            {`0`}
+          </Button>
+          <Button
+            style={styles.iconButton}
+            appearance="ghost"
+            status="danger"
+            accessoryLeft={HeartIcon}
+          >
+            {`1`}
+          </Button>
+        </View>
+      </Card>
+    );
+  };
   const onBuyButtonPress = (): void => {
     navigation && navigation.navigate("Payment", product);
   };
@@ -137,7 +173,10 @@ export default ({ navigation, route }): React.ReactElement => {
         placeholder="Write your comment"
         value={comment}
         onChangeText={setComment}
+        onBlur={addCommentsHandler}
       />
+
+      <List data={commentList} renderItem={commentListViewHandler} />
     </Layout>
   );
 
@@ -213,5 +252,26 @@ const themedStyles = StyleService.create({
   commentInput: {
     marginHorizontal: 16,
     marginVertical: 24,
+  },
+  commentItem: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  commentHeader: {
+    flexDirection: "row",
+    padding: 16,
+  },
+  commentAuthorContainer: {
+    flex: 1,
+    marginHorizontal: 16,
+  },
+  commentReactionsContainer: {
+    flexDirection: "row",
+    marginTop: 8,
+    marginHorizontal: -8,
+    marginVertical: -8,
+  },
+  iconButton: {
+    paddingHorizontal: 0,
   },
 });
