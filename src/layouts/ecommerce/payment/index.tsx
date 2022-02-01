@@ -134,7 +134,6 @@ const themedStyles = StyleService.create({
   cardLogo: {
     height: 24,
     width: 75,
-    color: 'text-control-color',
   },
   cardOptionsButton: {
     position: 'absolute',
