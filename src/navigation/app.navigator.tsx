@@ -2,6 +2,7 @@ import React from 'react';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { HomeNavigator } from './home.navigator';
 import { EcommerceNavigator } from './ecommerce.navigator';
+import { AuthNavigator } from './auth.navigator';
 
 /*
  * Navigation theming: https://reactnavigation.org/docs/en/next/themes.html
@@ -19,5 +20,6 @@ export const AppNavigator = (): React.ReactElement => (
   <NavigationContainer theme={navigatorTheme}>
     {/* <HomeNavigator/> */}
     <EcommerceNavigator/>
+    {/* <AuthNavigator/> */}
   </NavigationContainer>
 );

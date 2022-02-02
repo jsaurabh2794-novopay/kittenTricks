@@ -12,6 +12,9 @@ import { ProductDetails4Screen } from '../scenes/ecommerce/product-details-4.com
 import { PaymentScreen } from '../scenes/ecommerce/payment.component';
 import { ProductListScreen } from '../scenes/ecommerce/product-list.component';
 import { ShoppingCartScreen } from '../scenes/ecommerce/shopping-cart.component';
+import { SignIn2Screen } from '../scenes/auth/sign-in-2.component';
+import { SignUp2Screen } from '../scenes/auth/sign-up-2.component';
+import { ForgotPasswordScreen } from '../scenes/auth/forgot-password.component';
 
 const TopTab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
@@ -26,6 +29,7 @@ const EcommerceMenuNavigator = (): React.ReactElement => (
 export const EcommerceNavigator = (): React.ReactElement => (
   <Stack.Navigator headerMode='none'>
     {/* <Stack.Screen name='Ecommerce' component={EcommerceMenuNavigator}/> */}
+    <Stack.Screen name='SignIn' component={SignIn2Screen}/>
     <Stack.Screen name='ProductList' component={ProductListScreen}/>
     <Stack.Screen name='ProductDetails1' component={ProductDetails1Screen}/>
     <Stack.Screen name='ProductDetails2' component={ProductDetails2Screen}/>
@@ -34,5 +38,7 @@ export const EcommerceNavigator = (): React.ReactElement => (
     <Stack.Screen name='AddNewCard' component={AddNewCardScreen}/>
     <Stack.Screen name='Payment' component={PaymentScreen}/>
     <Stack.Screen name='ShoppingCart' component={ShoppingCartScreen}/>
+    <Stack.Screen name='SignUp' component={SignUp2Screen}/>
+    <Stack.Screen name='ForgotPassword' component={ForgotPasswordScreen}/>
   </Stack.Navigator>
 );

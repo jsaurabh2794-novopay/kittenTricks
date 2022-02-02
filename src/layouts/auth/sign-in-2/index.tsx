@@ -13,7 +13,7 @@ export default ({ navigation }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   const onSignUpButtonPress = (): void => {
-    navigation && navigation.navigate('SignUp2');
+    navigation && navigation.navigate('SignUp');
   };
 
   const onForgotPasswordButtonPress = (): void => {
@@ -29,6 +29,12 @@ export default ({ navigation }): React.ReactElement => {
       <Icon {...props} name={passwordVisible ? 'eye-off' : 'eye'} />
     </TouchableWithoutFeedback>
   );
+
+  const signInHandler = () => {
+    if (email === "admin@novopay.in" && password === "Novopay@123"){
+      navigation.navigate("ProductList");
+    }
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -49,14 +55,14 @@ export default ({ navigation }): React.ReactElement => {
         style={styles.formContainer}
         level='1'>
         <Input
-          placeholder='Email'
+          placeholder='admin@novopay.in'
           accessoryRight={PersonIcon}
           value={email}
           onChangeText={setEmail}
         />
         <Input
           style={styles.passwordInput}
-          placeholder='Password'
+          placeholder='Novopay@123'
           accessoryRight={renderPasswordIcon}
           value={password}
           secureTextEntry={!passwordVisible}
@@ -74,7 +80,9 @@ export default ({ navigation }): React.ReactElement => {
       </Layout>
       <Button
         style={styles.signInButton}
-        size='giant'>
+        size='giant'
+        onPress={signInHandler}
+        >
         SIGN IN
       </Button>
       <Button

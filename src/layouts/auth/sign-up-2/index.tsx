@@ -32,7 +32,7 @@ export default ({ navigation }): React.ReactElement => {
   };
 
   const onSignInButtonPress = (): void => {
-    navigation && navigation.navigate('SignIn2');
+    navigation && navigation.navigate('SignIn');
   };
 
   const onPasswordIconPress = (): void => {
