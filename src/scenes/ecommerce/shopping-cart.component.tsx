@@ -34,7 +34,7 @@ export const ShoppingCartScreen = ({ navigation,route }): React.ReactElement => 
         accessoryLeft={renderBackAction}
         accessoryRight={renderSearchAction}
       />
-      <ContentView route={route}/>
+      <ContentView route={route} navigation={navigation}/>
     </SafeAreaLayout>
   );
 };

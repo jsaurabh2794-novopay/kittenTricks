@@ -1,14 +1,20 @@
-import React from 'react';
-import { Button, Layout, List, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
-import { CartItem } from './extra/cart-item.component';
-import { useState } from 'react';
+import React from "react";
+import {
+  Button,
+  Layout,
+  List,
+  StyleService,
+  Text,
+  useStyleSheet,
+} from "@ui-kitten/components";
+import { CartItem } from "./extra/cart-item.component";
+import { useState } from "react";
 
-
-export default ({route}): React.ReactElement => {
+export default ({ route, navigation }): React.ReactElement => {
   const selectedProduct = route.params;
   const styles = useStyleSheet(themedStyle);
   const [products, setProducts] = React.useState<any[]>([selectedProduct]);
-  const [count,setCount] = useState(1);
+  const [count, setCount] = useState(1);
 
   const totalCost = (): number => {
     return count * selectedProduct.formattedPrice;
@@ -27,8 +33,8 @@ export default ({route}): React.ReactElement => {
 
   const renderFooter = (): React.ReactElement => (
     <Layout style={styles.footer}>
-      <Text category='h5'>Total Cost:</Text>
-      <Text category='h5'>{`$${totalCost()}`}</Text>
+      <Text category="h5">Total Cost:</Text>
+      <Text category="h5">{`$${totalCost()}`}</Text>
     </Layout>
   );
 
@@ -41,13 +47,15 @@ export default ({route}): React.ReactElement => {
       product={info.item}
       onProductChange={onItemChange}
       onRemove={onItemRemove}
-    /> 
+    />
   );
 
+  const checkoutHandler = () => {
+    navigation.navigate("Payment");
+  };
+
   return (
-    <Layout
-      style={styles.container}
-      level='2'>
+    <Layout style={styles.container} level="2">
       <List
         data={products}
         renderItem={renderProductItem}
@@ -55,7 +63,9 @@ export default ({route}): React.ReactElement => {
       />
       <Button
         style={styles.checkoutButton}
-        size='giant'>
+        size="giant"
+        onPress={checkoutHandler}
+      >
         CHECKOUT
       </Button>
     </Layout>
@@ -68,11 +78,11 @@ const themedStyle = StyleService.create({
   },
   item: {
     borderBottomWidth: 1,
-    borderBottomColor: 'background-basic-color-3',
+    borderBottomColor: "background-basic-color-3",
   },
   footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginVertical: 0.5,
     paddingVertical: 28,
     paddingHorizontal: 16,
@@ -82,4 +92,3 @@ const themedStyle = StyleService.create({
     marginVertical: 24,
   },
 });
-
