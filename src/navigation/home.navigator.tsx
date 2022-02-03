@@ -47,7 +47,7 @@ const HomeTabsNavigator = (): React.ReactElement => (
 
 export const HomeNavigator = (): React.ReactElement => (
   <Drawer.Navigator
-    screenOptions={{ gestureEnabled: false }}
+    screenOptions={{ gestureEnabled: true }}
     drawerContent={props => <HomeDrawer {...props} />}>
     {/* <Drawer.Screen name='Home' component={HomeTabsNavigator} /> */}
     <Drawer.Screen name='Home' component={EcommerceNavigator} />
