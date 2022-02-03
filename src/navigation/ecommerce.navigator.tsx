@@ -29,7 +29,7 @@ const EcommerceMenuNavigator = (): React.ReactElement => (
 export const EcommerceNavigator = (): React.ReactElement => (
   <Stack.Navigator headerMode='none'>
     {/* <Stack.Screen name='Ecommerce' component={EcommerceMenuNavigator}/> */}
-    <Stack.Screen name='SignIn' component={SignIn2Screen}/>
+    {/* <Stack.Screen name='SignIn' component={SignIn2Screen}/> */}
     <Stack.Screen name='ProductList' component={ProductListScreen}/>
     <Stack.Screen name='ProductDetails1' component={ProductDetails1Screen}/>
     <Stack.Screen name='ProductDetails2' component={ProductDetails2Screen}/>
@@ -38,7 +38,7 @@ export const EcommerceNavigator = (): React.ReactElement => (
     <Stack.Screen name='AddNewCard' component={AddNewCardScreen}/>
     <Stack.Screen name='Payment' component={PaymentScreen}/>
     <Stack.Screen name='ShoppingCart' component={ShoppingCartScreen}/>
-    <Stack.Screen name='SignUp' component={SignUp2Screen}/>
-    <Stack.Screen name='ForgotPassword' component={ForgotPasswordScreen}/>
+    {/* <Stack.Screen name='SignUp' component={SignUp2Screen}/> */}
+    {/* <Stack.Screen name='ForgotPassword' component={ForgotPasswordScreen}/> */}
   </Stack.Navigator>
 );
