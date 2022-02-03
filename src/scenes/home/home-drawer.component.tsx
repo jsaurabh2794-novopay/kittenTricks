@@ -10,33 +10,36 @@ import {
   Text,
   IndexPath,
 } from '@ui-kitten/components';
-import { BookIcon, GithubIcon } from '../../components/icons';
+import { BookIcon, GithubIcon, LogoutIcon } from '../../components/icons';
 import { SafeAreaLayout } from '../../components/safe-area-layout.component';
 import { WebBrowserService } from '../../services/web-browser.service';
 import { AppInfoService } from '../../services/app-info.service';
+import { useContext } from 'react';
+import AuthContext from '../../context/Auth-context';
 
 const version: string = AppInfoService.getVersion();
 
 export const HomeDrawer = ({ navigation }): DrawerElement => {
   const [selectedIndex, setSelectedIndex] = useState<IndexPath>(null);
+  const ctx = useContext(AuthContext);
 
   const DATA = [
     {
-      title: 'Libraries',
-      icon: GithubIcon,
+      title: 'Logout',
+      icon: LogoutIcon,
       onPress: () => {
         navigation.toggleDrawer();
-        navigation.navigate('Libraries');
+        ctx.logoutHandler();
       },
     },
-    {
-      title: 'Documentation',
-      icon: BookIcon,
-      onPress: () => {
-        WebBrowserService.openBrowserAsync('https://akveo.github.io/react-native-ui-kitten');
-        navigation.toggleDrawer();
-      },
-    },
+    // {
+    //   title: 'Documentation',
+    //   icon: BookIcon,
+    //   onPress: () => {
+    //     WebBrowserService.openBrowserAsync('https://akveo.github.io/react-native-ui-kitten');
+    //     navigation.toggleDrawer();
+    //   },
+    // },
   ];
 
   const renderHeader = (): ReactElement => (
@@ -48,7 +51,7 @@ export const HomeDrawer = ({ navigation }): DrawerElement => {
             source={require('../../assets/images/image-app-icon.png')}
           />
           <Text style={styles.profileName} category='h6'>
-            Kitten Tricks
+            Medusa Store
           </Text>
         </View>
       </Layout>

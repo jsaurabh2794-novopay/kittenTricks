@@ -36,7 +36,7 @@ export const AppNavigator = (): React.ReactElement => {
       }}
     >
       <NavigationContainer theme={navigatorTheme}>
-        {isLoggedIn && <EcommerceNavigator />}
+        {isLoggedIn && <HomeNavigator />}
         {!isLoggedIn && <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>

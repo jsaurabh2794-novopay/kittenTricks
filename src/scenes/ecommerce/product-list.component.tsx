@@ -2,15 +2,15 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 import { SafeAreaLayout } from '../../components/safe-area-layout.component';
-import { ArrowIosBackIcon } from '../../components/icons';
+import { ArrowIosBackIcon, MenuIcon } from '../../components/icons';
 import ContentView from '../../layouts/ecommerce/product-list';
 
 export const ProductListScreen = ({ navigation }): React.ReactElement => {
 
-  const renderBackAction = (): React.ReactElement => (
+  const renderMenuAction = (): React.ReactElement => (
     <TopNavigationAction
-      icon={ArrowIosBackIcon}
-      onPress={navigation.goBack}
+      icon={MenuIcon}
+      onPress={navigation.toggleDrawer}
     />
   );
 
@@ -21,7 +21,7 @@ export const ProductListScreen = ({ navigation }): React.ReactElement => {
       <TopNavigation
         title='All Products'
         style={{backgroundColor:"lightblue"}}
-        // accessoryLeft={renderBackAction} 
+        accessoryLeft={renderMenuAction} 
       />
       <ContentView/>
     </SafeAreaLayout>

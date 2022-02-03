@@ -11,6 +11,9 @@ import { ThemesNavigator } from './themes.navigator';
 import { HomeBottomNavigation } from '../scenes/home/home-bottom-navigation.component';
 import { HomeDrawer } from '../scenes/home/home-drawer.component';
 import { LibrariesScreen } from '../scenes/libraries/libraries.component';
+import { EcommerceNavigator } from './ecommerce.navigator';
+import { TopNavigation } from '@ui-kitten/components';
+import { MenuIcon } from 'src/components/icons';
 
 const BottomTab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -30,6 +33,7 @@ const TabBarVisibilityOptions = ({ route }): BottomTabNavigationOptions => {
   return { tabBarVisible: isRootRoute && !isNestedRoute };
 };
 
+
 const HomeTabsNavigator = (): React.ReactElement => (
   <BottomTab.Navigator
     screenOptions={TabBarVisibilityOptions}
@@ -45,8 +49,9 @@ export const HomeNavigator = (): React.ReactElement => (
   <Drawer.Navigator
     screenOptions={{ gestureEnabled: false }}
     drawerContent={props => <HomeDrawer {...props} />}>
-    <Drawer.Screen name='Home' component={HomeTabsNavigator} />
-    <Drawer.Screen name='Libraries' component={LibrariesScreen} />
+    {/* <Drawer.Screen name='Home' component={HomeTabsNavigator} /> */}
+    <Drawer.Screen name='Home' component={EcommerceNavigator} />
+    {/* <Drawer.Screen name='Libraries' component={LibrariesScreen} /> */}
   </Drawer.Navigator>
 );
 

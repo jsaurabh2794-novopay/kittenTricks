@@ -14,6 +14,10 @@ export const BookIcon = (style: ImageStyle): IconElement => (
   <Icon {...style} name='book'/>
 );
 
+export const LogoutIcon = (style: ImageStyle): IconElement => (
+  <Icon {...style} name='log-out'/>
+);
+
 export const BookmarkIcon = (style: ImageStyle): IconElement => (
   <Icon {...style} name='bookmark'/>
 );
