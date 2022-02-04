@@ -1,20 +1,9 @@
 {
   "expo": {
-    "name": "Kitten Tricks",
-    "slug": "kitten-tricks",
+    "name": "Medusa Store",
+    "slug": "medusa-store",
     "version": "2.4.0",
-    "description": "UI Kitten Demo Application",
-    "githubUrl": "https://github.com/akveo/kittenTricks",
-    "ios": {
-      "bundleIdentifier": "com.akveo.kittentricks",
-      "appStoreUrl": "https://itunes.apple.com/us/app/kitten-tricks/id1246143230",
-      "buildNumber": "3"
-    },
-    "android": {
-      "package": "com.akveo.kittenTricks",
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.akveo.kittenTricks",
-      "versionCode": 3
-    },
+    "description": "",
     "privacy": "public",
     "platforms": [
       "ios",
