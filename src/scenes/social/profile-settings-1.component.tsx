@@ -19,7 +19,7 @@ export const ProfileSettings1Screen = ({ navigation }): React.ReactElement => {
       style={styles.container}
       insets='top'>
       <TopNavigation
-        title='Profile'
+        title='Profile Details'
         accessoryLeft={renderBackAction}
       />
       <ContentView navigation={navigation}/>

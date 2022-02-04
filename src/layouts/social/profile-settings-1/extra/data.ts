@@ -19,15 +19,15 @@ export class Profile {
 
   static jenniferGreen(): Profile {
     return new Profile(
-      'Jennifer',
-      'Green',
+      'Admin',
+      'Admin',
       require('../assets/image-profile.jpg'),
-      Gender.FEMALE,
+      Gender.MALE,
       25,
       48,
       174,
-      'jen.green@gmail.com',
-      '+375 44 846 97 68',
+      'admin@novopay.in',
+      '+91 98985 98789',
     );
   }
 }

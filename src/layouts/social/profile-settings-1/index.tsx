@@ -50,18 +50,8 @@ export default ({ navigation }): React.ReactElement => {
       />
       <ProfileSetting
         style={styles.profileSetting}
-        hint='Age'
-        value={`${profile.age}`}
-      />
-      <ProfileSetting
-        style={styles.profileSetting}
-        hint='Weight'
-        value={`${profile.weight} kg`}
-      />
-      <ProfileSetting
-        style={styles.profileSetting}
-        hint='Height'
-        value={`${profile.height} cm`}
+        hint='Date Of Birth'
+        value={`01-01-1953`}
       />
       <ProfileSetting
         style={[styles.profileSetting, styles.section]}
